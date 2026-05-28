@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-28T18:55:34 IST" name="Surefire suite" finished-at="2026-05-28T18:55:39 IST" duration-ms="4571">
+    <groups>
+    </groups>
+    <test started-at="2026-05-28T18:55:34 IST" name="Surefire test" finished-at="2026-05-28T18:55:39 IST" duration-ms="4571">
+      <class name="galaxyautomation.GalaxyTest">
+        <test-method signature="openWebsiteTest()[pri:0, instance:galaxyautomation.GalaxyTest@6a01e23]" started-at="2026-05-28T18:55:34 IST" name="openWebsiteTest" finished-at="2026-05-28T18:55:39 IST" duration-ms="4561" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openWebsiteTest -->
+      </class> <!-- galaxyautomation.GalaxyTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
