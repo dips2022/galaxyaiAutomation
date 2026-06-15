@@ -1,1 +1,6 @@
+/Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/base/BaseTest.java
 /Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/galaxyautomation/GalaxyTest.java
+/Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/pages/LoginPage.java
+/Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/pages/SignupPage.java
+/Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/pages/VerificationPage.java
+/Users/soumyanilpodder/Projects/SeleniumProject/galaxyautomation/src/test/java/utilities/ExtentManager.java

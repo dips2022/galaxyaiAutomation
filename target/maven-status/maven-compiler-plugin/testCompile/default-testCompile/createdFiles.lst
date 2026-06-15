@@ -1,0 +1,6 @@
+galaxyautomation/GalaxyTest.class
+pages/VerificationPage.class
+utilities/ExtentManager.class
+pages/LoginPage.class
+base/BaseTest.class
+pages/SignupPage.class

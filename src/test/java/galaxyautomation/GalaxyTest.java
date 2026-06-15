@@ -1,30 +1,50 @@
 package galaxyautomation;
 
 import java.time.Duration;
+import pages.LoginPage;
+import pages.SignupPage;
+import pages.VerificationPage;
+import base.BaseTest;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import utilities.ExtentManager;
 
-public class GalaxyTest {
+public class GalaxyTest extends BaseTest {
+
+	// Extent Report object
+	ExtentReports extent;
+
+	// Individual test report object
+	ExtentTest test;
+
+	@BeforeSuite
+	public void setupReport() {
+
+		// Creates Extent Report before test execution
+		extent = ExtentManager.getReportInstance();
+	}
 
 	@Test
 	public void openWebsiteTest() {
 
-		WebDriverManager.chromedriver().setup();
+		// Create test entry in Extent Report
+		test = extent.createTest("Open Galaxy AI Website");
 
-		WebDriver driver = new ChromeDriver();
+		LoginPage loginPage = new LoginPage(driver);
 
-		driver.manage().window().maximize();
-
-		driver.get("https://www.galaxy.ai");
+		// Log success message in Extent Report
+		test.pass("Galaxy AI website opened successfully");
 
 		// Explicit Wait:
 		// Waits up to 15 seconds for a specific element condition
@@ -43,64 +63,43 @@ public class GalaxyTest {
 
 		System.out.println("Popup closed successfully");
 
-		// Dynamic locator for Sign in button
-		// We use nav + button text because Sign in is inside navigation menu
-		By signInBtn = By.xpath("//nav//button[normalize-space()='Sign in']");
+		loginPage.clickGetStarted();
+		System.out.println("Clicked Get Started");
 
-		// Wait until Sign in button is visible
-		WebElement signInButton = wait.until(ExpectedConditions.visibilityOfElementLocated(signInBtn));
+		SignupPage signupPage = new SignupPage(driver);
 
-		// Scroll to Sign in button
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", signInButton);
+		System.out.println("Entering First Name");
 
-		// Click Sign in button using JavaScript
-		// This helps if normal click is blocked by popup or overlay
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", signInButton);
+		signupPage.enterFirstName("Dipali");
+		System.out.println("Entering Last Name");
 
-		System.out.println("Clicked on Sign in button successfully");
+		signupPage.enterLastName("Sonawane");
+		System.out.println("Entering Email");
 
-		// Dynamic locator for Sign up link
-		// It checks link text "Sign up" and href contains "sign-up"
-		By signUpLink = By.xpath("//a[normalize-space()='Sign up' and contains(@href,'sign-up')]");
+		signupPage.enterEmail("dipalinsonawane1999@gmail.com");
+		System.out.println("Entering Password");
 
-		// Wait until Sign up link is clickable
-		WebElement signUpButton = wait.until(ExpectedConditions.elementToBeClickable(signUpLink));
-
-		// Click Sign up link
-		signUpButton.click();
-
-		System.out.println("Clicked on Sign up link successfully");
-
-		// Wait and enter First Name
-		WebElement firstNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("firstName-field")));
-		firstNameField.sendKeys("Dipali");
-
-		// Wait and enter Last Name
-		WebElement lastNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("lastName-field")));
-		lastNameField.sendKeys("Sonawane");
-
-		// Wait and enter Email
-		WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("emailAddress-field")));
-		emailField.sendKeys("dipalinsonawane1999@gmail.com");
-
-		// Wait and enter Password
-		WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password-field")));
-		passwordField.sendKeys("Dipali@Galaxy.ai2026");
-
-		System.out.println("Signup details entered successfully");
-
-		// Dynamic locator for Continue button
-		// It finds button which has span text "Continue"
-		By continueBtn = By.xpath("//button[.//span[normalize-space()='Continue']]");
+		signupPage.enterPassword("Dipali@Galaxy.ai26");
 
 		// Wait until Continue button is clickable
-		WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
-
-		// Click Continue button
-		continueButton.click();
+		signupPage.clickContinue();
 
 		System.out.println("Clicked on Continue button successfully");
+		test.pass("Signup form submitted successfully");
 
-//		driver.quit();
+//		VerificationPage verificationPage = new VerificationPage(driver);
+//		System.out.println(driver.getPageSource());
+//		Assert.assertTrue(
+//			    driver.getTitle().contains("Sign Up")
+//			);
+
+		driver.quit();
+	}
+
+	@AfterSuite
+	public void tearDownReport() {
+
+		// Saves report after execution
+		extent.flush();
 	}
 }
